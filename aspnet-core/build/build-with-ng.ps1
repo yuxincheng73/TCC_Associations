@@ -21,19 +21,6 @@ dotnet restore
 Set-Location $webHostFolder
 dotnet publish --output (Join-Path $outputFolder "Host")
 
-## PUBLISH ANGULAR UI PROJECT #################################################
-
-Set-Location $ngFolder
-& yarn
-& ng build --prod
-Copy-Item (Join-Path $ngFolder "dist") (Join-Path $outputFolder "ng") -Recurse
-Copy-Item (Join-Path $ngFolder "Dockerfile") (Join-Path $outputFolder "ng")
-
-# Change UI configuration
-$ngConfigPath = Join-Path $outputFolder "ng/assets/appconfig.json"
-(Get-Content $ngConfigPath) -replace "21021", "9901" | Set-Content $ngConfigPath
-(Get-Content $ngConfigPath) -replace "4200", "9902" | Set-Content $ngConfigPath
-
 ## CREATE DOCKER IMAGES #######################################################
 
 # Host
@@ -41,12 +28,6 @@ Set-Location (Join-Path $outputFolder "Host")
 
 docker rmi abp/host -f
 docker build -t abp/host .
-
-# Angular UI
-Set-Location (Join-Path $outputFolder "ng")
-
-docker rmi abp/ng -f
-docker build -t abp/ng .
 
 ## DOCKER COMPOSE FILES #######################################################
 

@@ -9,7 +9,7 @@ using TCCAssociation.Models;
 
 namespace TCCAssociation.Associations
 {
-    class AssociationsService : TCCAssociationAppServiceBase, IAssociationsService
+    public class AssociationsService : TCCAssociationAppServiceBase, IAssociationsService
     {
         private readonly IMongoCollection<Association> _associationRepository;
 
