@@ -14,7 +14,7 @@ namespace TCCAssociation.Associations
         Task<AssociationDto> GetAssociation(int id);
         //Task<AssociationDto> GetAssociationbyName(string name, string language_code);
         Task<int> CreateAssociation(AssociationDto input);
-        Task<AssociationDto> UpdateAssociation(AssociationDto input);
+        Task<AssociationDto> UpdateAssociation(int id, AssociationDto input);
         Task<int> DeleteAssociation(EntityDto id);
     }
 }

@@ -74,7 +74,7 @@ namespace TCCAssociation.Associations
             return associationsToReturn;
         }
 
-        public async Task<AssociationDto> UpdateAssociation(AssociationDto input)
+        public async Task<AssociationDto> UpdateAssociation(int id, AssociationDto input)
         {
             if(input == null)
             {
@@ -82,6 +82,7 @@ namespace TCCAssociation.Associations
             }
 
             var association = ObjectMapper.Map<Association>(input);
+            association.Id = id;
             var associationUpdated = await _associationRepository.UpdateAsync(association);
             var associationToReturn = ObjectMapper.Map<AssociationDto>(associationUpdated);
             return associationToReturn;

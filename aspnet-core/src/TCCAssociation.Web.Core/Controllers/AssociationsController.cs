@@ -31,7 +31,7 @@ namespace TCCAssociation.Controllers
         }
 
         [HttpGet]
-        [Route("association/{id}")]
+        [Route("associations/{id}")]
         public async Task<IActionResult> GetAssociation(int id)
         {
             var association = await _associationsService.GetAssociation(id);
@@ -43,7 +43,7 @@ namespace TCCAssociation.Controllers
         }
 
         [HttpPost]
-        [Route("association")]
+        [Route("associations")]
         public async Task<IActionResult> CreateAssociation(AssociationDto input)
         {
             if(input == null)
@@ -59,14 +59,14 @@ namespace TCCAssociation.Controllers
         }
 
         [HttpPut]
-        [Route("association")]
-        public async Task<IActionResult> UpdateAssociation(AssociationDto input)
+        [Route("associations/{id}")]
+        public async Task<IActionResult> UpdateAssociation(int id, AssociationDto input)
         {
             if(input == null)
             {
                 return BadRequest();
             }
-            var association = await _associationsService.UpdateAssociation(input);
+            var association = await _associationsService.UpdateAssociation(id, input);
             if(association == null)
             {
                 return BadRequest();
@@ -75,7 +75,7 @@ namespace TCCAssociation.Controllers
         }
 
         [HttpDelete]
-        [Route("association")]
+        [Route("associations")]
         public async Task<IActionResult> DeleteAssociation(EntityDto id)
         {
             var association = await _associationsService.DeleteAssociation(id);
