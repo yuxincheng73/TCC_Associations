@@ -43,7 +43,7 @@ namespace TCCAssociation.EntityFrameworkCore
         {
             if (!SkipDbSeed)
             {
-                SeedHelper.SeedHostDb(IocManager);
+              SeedHelper.SeedHostDb(IocManager);
             }
         }
     }
