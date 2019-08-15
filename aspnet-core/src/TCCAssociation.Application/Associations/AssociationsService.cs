@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using TCCAssociation.Associations.Dto;
 using TCCAssociation.Models;
@@ -80,7 +81,12 @@ namespace TCCAssociation.Associations
             {
                 return null;
             }
-
+            //check if id exists 
+            var checkIfAssociationExist = await _associationRepository.GetAll().AnyAsync(c => c.Id == id);
+            if(!checkIfAssociationExist)
+            {
+                return null;
+            }
             var association = ObjectMapper.Map<Association>(input);
             association.Id = id;
             var associationUpdated = await _associationRepository.UpdateAsync(association);
